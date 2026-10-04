@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>ExpenseTrack | Manage Your Money Smarter</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+
+  <body>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+
+    <div class="flash-container">
+      {% for message in messages %}
+
+      <div class="flash-message">
+        {{ message }}
+
+        <button onclick="this.parentElement.remove()">×</button>
+      </div>
+
+      {% endfor %}
+    </div>
+
+    {% endif %} {% endwith %}
+    <!-- ================= NAVBAR ================= -->
+
+    <nav class="navbar">
+      <div class="logo">Expense<span>Track</span></div>
+
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+
+        <a href="#" class="login-link" onclick="openLoginModal(event)">
+          Login
+        </a>
+
+        <a href="#" class="nav-btn" onclick="openRegisterModal(event)">
+          Get Started
+        </a>
+      </div>
+    </nav>
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+      <div class="hero-content">
+        <div class="hero-badge">💰 Smart & Simple Expense Management</div>
+
+        <h1>
+          Take Control of Your
+          <span>Money.</span>
+        </h1>
+
+        <p>
+          Track your expenses, manage your spending, and understand where your
+          money goes — all in one simple dashboard.
+        </p>
+
+        <div class="hero-buttons">
+          <a
+            href="#"
+            class="btn primary-btn"
+            onclick="openRegisterModal(event)"
+          >
+            Get Started →
+          </a>
+
+          <a href="#" class="btn secondary-btn" onclick="openLoginModal(event)">
+            Login
+          </a>
+        </div>
+
+        <div class="hero-note">
+          ✓ Easy to use &nbsp;&nbsp; ✓ Secure &nbsp;&nbsp; ✓ Track anytime
+        </div>
+      </div>
+
+      <!-- Dashboard Preview -->
+
+      <div class="dashboard-preview">
+        <div class="preview-header">
+          <div>
+            <small>Welcome back</small>
+            <h3>Expense Overview</h3>
+          </div>
+
+          <div class="preview-avatar">ET</div>
+        </div>
+
+        <div class="preview-balance">
+          <small>Total Balance</small>
+
+          <h2>₹24,580</h2>
+
+          <span class="balance-positive"> ↑ 12.5% this month </span>
+        </div>
+
+        <div class="preview-stats">
+          <div class="preview-card">
+            <small>Income</small>
+            <strong>₹35,000</strong>
+          </div>
+
+          <div class="preview-card">
+            <small>Expenses</small>
+            <strong>₹10,420</strong>
+          </div>
+        </div>
+
+        <div class="expense-preview">
+          <div class="preview-title">
+            <strong>Recent Expenses</strong>
+            <span>View all</span>
+          </div>
+
+          <div class="mini-expense">
+            <div class="mini-icon">🍔</div>
+
+            <div>
+              <strong>Food</strong>
+              <small>Today</small>
+            </div>
+
+            <b>- ₹450</b>
+          </div>
+
+          <div class="mini-expense">
+            <div class="mini-icon">🚗</div>
+
+            <div>
+              <strong>Transport</strong>
+              <small>Yesterday</small>
+            </div>
+
+            <b>- ₹300</b>
+          </div>
+
+          <div class="mini-expense">
+            <div class="mini-icon">🛍️</div>
+
+            <div>
+              <strong>Shopping</strong>
+              <small>Sep 12</small>
+            </div>
+
+            <b>- ₹1,250</b>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FEATURES ================= -->
+
+    <section class="features-section" id="features">
+      <div class="section-heading">
+        <span>FEATURES</span>
+
+        <h2>Everything you need to manage your expenses</h2>
+
+        <p>
+          Simple tools designed to help you understand and control your everyday
+          spending.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">💳</div>
+
+          <h3>Track Expenses</h3>
+
+          <p>
+            Easily record your daily expenses and keep your spending organized.
+          </p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+
+          <h3>Smart Dashboard</h3>
+
+          <p>Get a clear overview of your income, expenses and balance.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">📈</div>
+
+          <h3>Reports & Insights</h3>
+
+          <p>Understand your spending habits with useful reports and charts.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">🔐</div>
+
+          <h3>Secure Account</h3>
+
+          <p>
+            Your financial data stays separated and protected within your
+            account.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= ABOUT ================= -->
+
+    <section class="about-section" id="about">
+      <div class="about-content">
+        <span>ABOUT EXPENSETRACK</span>
+
+        <h2>Make every rupee count.</h2>
+
+        <p>
+          ExpenseTrack is a simple personal finance management application that
+          helps you record expenses, monitor your spending and make better
+          financial decisions.
+        </p>
+
+        <div class="about-points">
+          <div>✓ Track daily spending</div>
+
+          <div>✓ Manage income and expenses</div>
+
+          <div>✓ Analyze your spending habits</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= CTA ================= -->
+
+    <section class="cta">
+      <h2>Ready to take control of your finances?</h2>
+
+      <p>Start tracking your expenses today.</p>
+
+      <a href="#" class="btn primary-btn" onclick="openRegisterModal(event)">
+        Create Free Account →
+      </a>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+      <div class="footer-logo">Expense<span>Track</span></div>
+
+      <p>Simple. Smart. Personal Finance Management.</p>
+
+      <div class="footer-line"></div>
+
+      <small> © 2026 ExpenseTrack. All rights reserved. </small>
+    </footer>
+
+    <!-- ================= REGISTER MODAL ================= -->
+
+    <div class="modal-overlay" id="registerModal">
+      <div class="register-modal">
+        <!-- Close Button -->
+
+        <button class="modal-close" onclick="closeRegisterModal()">×</button>
+
+        <!-- Header -->
+
+        <div class="register-header">
+          <div class="register-icon">👤</div>
+
+          <h2>Create your account</h2>
+
+          <p>Start managing your expenses smarter.</p>
+        </div>
+
+        <!-- Form -->
+
+        <form id="registerForm" action="/register" method="POST">
+          <div class="form-group">
+            <label> Full Name </label>
+
+            <div class="input-wrapper">
+              <span>👤</span>
+
+              <input
+                type="text"
+                name="name"
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label> Email Address </label>
+
+            <div class="input-wrapper">
+              <span>✉️</span>
+
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label> Password </label>
+
+            <div class="input-wrapper">
+              <span>🔒</span>
+
+              <input
+                type="password"
+                name="password"
+                id="registerPassword"
+                placeholder="Create a password"
+                required
+              />
+
+              <button
+                type="button"
+                class="password-toggle"
+                onclick="togglePassword('registerPassword', this)"
+              >
+                👁
+              </button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label> Confirm Password </label>
+
+            <div class="input-wrapper">
+              <span>🔒</span>
+
+              <input
+                type="password"
+                name="confirm_password"
+                id="confirmPassword"
+                placeholder="Confirm your password"
+                required
+              />
+
+              <button
+                type="button"
+                class="password-toggle"
+                onclick="togglePassword('confirmPassword', this)"
+              >
+                👁
+              </button>
+            </div>
+          </div>
+
+          <div class="terms">
+            <input type="checkbox" id="terms" required />
+
+            <label for="terms"> I agree to the Terms & Privacy Policy </label>
+          </div>
+
+          <button type="submit" class="register-submit">Create Account</button>
+
+          <div class="login-text">
+            Already have an account?
+
+            <a href="#" onclick="switchToLogin(event)"> Login </a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- ================= LOGIN MODAL ================= -->
+
+    <div class="modal-overlay" id="loginModal">
+      <div class="login-modal">
+        <!-- Close Button -->
+
+        <button class="modal-close" onclick="closeLoginModal()">×</button>
+
+        <!-- Header -->
+
+        <div class="login-header">
+          <div class="login-icon">🔐</div>
+
+          <h2>Welcome back</h2>
+
+          <p>Login to manage your expenses.</p>
+        </div>
+
+        <!-- Login Form -->
+
+        <form id="loginForm" action="/login" method="POST">
+          <div class="form-group">
+            <label> Email Address </label>
+
+            <div class="input-wrapper">
+              <span>✉️</span>
+
+              <input
+                type="email"
+                name="email"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label> Password </label>
+
+            <div class="input-wrapper">
+              <span>🔒</span>
+
+              <input
+                type="password"
+                name="password"
+                id="loginPassword"
+                placeholder="Enter your password"
+                required
+              />
+
+              <button
+                type="button"
+                class="password-toggle"
+                onclick="togglePassword('loginPassword', this)"
+              >
+                👁
+              </button>
+            </div>
+          </div>
+
+          <div class="login-options">
+            <label class="remember-me">
+              <input type="checkbox" name="remember" />
+
+              <span> Remember me </span>
+            </label>
+
+            <a href="#"> Forgot Password? </a>
+          </div>
+
+          <button type="submit" class="login-submit">Login to Account</button>
+
+          <div class="register-text">
+            Don't have an account?
+
+            <a href="#" onclick="switchToRegister(event)"> Create Account </a>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      function openRegisterModal(event) {
+        if (event) {
+          event.preventDefault();
+        }
+
+        document.getElementById("registerModal").classList.add("active");
+
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeRegisterModal() {
+        document.getElementById("registerModal").classList.remove("active");
+
+        document.body.style.overflow = "";
+      }
+
+      function togglePassword(inputId, button) {
+        const input = document.getElementById(inputId);
+
+        if (input.type === "password") {
+          input.type = "text";
+          button.textContent = "🙈";
+        } else {
+          input.type = "password";
+          button.textContent = "👁";
+        }
+      }
+
+      /* Close when clicking outside */
+
+      document
+        .getElementById("registerModal")
+        .addEventListener("click", function (event) {
+          if (event.target === this) {
+            closeRegisterModal();
+          }
+        });
+
+      /* Close with ESC */
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closeRegisterModal();
+        }
+      });
+    </script>
+
+    <script>
+      function openLoginModal(event) {
+        if (event) {
+          event.preventDefault();
+        }
+
+        closeRegisterModal();
+
+        document.getElementById("loginModal").classList.add("active");
+
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLoginModal() {
+        document.getElementById("loginModal").classList.remove("active");
+
+        document.body.style.overflow = "";
+      }
+
+      /* Register → Login */
+
+      function switchToLogin(event) {
+        event.preventDefault();
+
+        closeRegisterModal();
+
+        setTimeout(function () {
+          openLoginModal();
+        }, 150);
+      }
+
+      /* Login → Register */
+
+      function switchToRegister(event) {
+        event.preventDefault();
+
+        closeLoginModal();
+
+        setTimeout(function () {
+          openRegisterModal();
+        }, 150);
+      }
+
+      /* Close Login when clicking outside */
+
+      document
+        .getElementById("loginModal")
+        .addEventListener("click", function (event) {
+          if (event.target === this) {
+            closeLoginModal();
+          }
+        });
+
+      /* ESC */
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          closeLoginModal();
+          closeRegisterModal();
+        }
+      });
+    </script>
+  </body>
+</html>
